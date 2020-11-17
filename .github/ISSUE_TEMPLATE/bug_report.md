@@ -35,10 +35,10 @@ For example:
 
 **Information**
 <!-- Please complete the following: -->
-Minecraft version:
-Mod version:
-Mod loader:
-Mod loader version:
+- Minecraft version:  
+- Mod version:  
+- Mod loader:  
+- Mod loader version:  
 
 **Additional context**
 <!-- Add any other context about the problem here. -->
