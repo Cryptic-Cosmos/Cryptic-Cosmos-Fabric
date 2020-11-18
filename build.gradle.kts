@@ -93,6 +93,7 @@ license {
         set("projectName", "MythosCraft")
     }
 
+    include("**/*.java")
     include("**/*.kt")
 }
 
