@@ -37,7 +37,7 @@ object MythosCraftFabric : ModInitializer {
     fun id(path: String): Identifier = Identifier(MOD_ID, path)
 
     override fun onInitialize() {
-        // TODO: datagen, port all the other stuff
+        // TODO: data generation, port all the other stuff
 
         ItemRegistries.loadAll()
 

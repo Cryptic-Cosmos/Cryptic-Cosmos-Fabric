@@ -1,7 +1,7 @@
 # MythosCraft Fabric
 Welcome to the repository for MythosCraft on the Fabric modloader.
 
-**Are you looking for a bleeding edge version? See [the develop branch](https://github.com/Team-MythosCraft/MythosCraft-Fabric/tree/develop/)!**
+**Are you looking for a stable version? See [the main branch](https://github.com/Team-MythosCraft/MythosCraft-Fabric/tree/main/)!**
 
 ## Requirements
 Requires:
