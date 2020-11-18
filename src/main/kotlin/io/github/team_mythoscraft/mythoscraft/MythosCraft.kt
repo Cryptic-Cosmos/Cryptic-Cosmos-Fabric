@@ -48,7 +48,7 @@ object MythosCraft : ModInitializer {
         ItemRegistries
         BlockRegistries
 
-        // why is this here? because yes
+        // why is this here? because i was bored and also yes
         LOGGER.info("haha yes")
     }
 }
