@@ -19,6 +19,7 @@
 
 package io.github.team_mythoscraft.mythoscraft
 
+import io.github.team_mythoscraft.mythoscraft.registries.BlockRegistries
 import io.github.team_mythoscraft.mythoscraft.registries.ItemRegistries
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
@@ -43,8 +44,9 @@ object MythosCraft : ModInitializer {
         // TODO: data generation, port all the other stuff
 
         // you may be asking yourself, why is this here?
-        // well, it's to forcefully register any items which aren't referenced in code
+        // well, it's to forcefully register any items/blocks/whatever which aren't referenced in code
         ItemRegistries
+        BlockRegistries
 
         LOGGER.info("haha yes")
     }

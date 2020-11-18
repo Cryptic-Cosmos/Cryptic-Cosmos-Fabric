@@ -27,7 +27,7 @@ import net.minecraft.util.registry.Registry
 object ItemRegistries {
     private fun register(id: String, item: Item) = Registry.register(Registry.ITEM, MythosCraft.id(id), item)
 
-    private val DEFAULT_ITEM_PROPERTY: Item.Settings = Item.Settings().group(MythosCraft.ITEM_GROUP)
+    val DEFAULT_ITEM_PROPERTY: Item.Settings = Item.Settings().group(MythosCraft.ITEM_GROUP)
 
     val HUMMING_INGOT: Item = register("humming_ingot", Item(DEFAULT_ITEM_PROPERTY))
 }
