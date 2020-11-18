@@ -18,10 +18,10 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "io.github.team_mythoscraft.mythoscraft.MythosCraftFabric::INSTANCE"
+      "io.github.team_mythoscraft.mythoscraft.MythosCraft::INSTANCE"
     ],
     "client": [
-      "io.github.team_mythoscraft.mythoscraft.client.MythosCraftFabricClient::INSTANCE"
+      "io.github.team_mythoscraft.mythoscraft.client.MythosCraftClient::INSTANCE"
     ]
   },
   "mixins": [

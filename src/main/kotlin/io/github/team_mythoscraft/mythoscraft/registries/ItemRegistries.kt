@@ -19,13 +19,13 @@
 
 package io.github.team_mythoscraft.mythoscraft.registries
 
-import io.github.team_mythoscraft.mythoscraft.MythosCraftFabric
+import io.github.team_mythoscraft.mythoscraft.MythosCraft
 import net.minecraft.item.Item
 import net.minecraft.util.registry.Registry
 
 @Suppress("UNUSED")
 object ItemRegistries {
-    private fun register(id: String, item: Item) = Registry.register(Registry.ITEM, MythosCraftFabric.id(id), item)
+    private fun register(id: String, item: Item) = Registry.register(Registry.ITEM, MythosCraft.id(id), item)
 
     fun loadAll() {
         // yes i know
@@ -33,7 +33,7 @@ object ItemRegistries {
         klass.fields.forEach { _ -> }
     }
 
-    private val DEFAULT_ITEM_PROPERTY: Item.Settings = Item.Settings().group(MythosCraftFabric.ITEM_GROUP)
+    private val DEFAULT_ITEM_PROPERTY: Item.Settings = Item.Settings().group(MythosCraft.ITEM_GROUP)
 
     val HUMMING_INGOT: Item = register("humming_ingot", Item(DEFAULT_ITEM_PROPERTY))
 }

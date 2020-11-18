@@ -28,7 +28,7 @@ import net.minecraft.item.Items
 import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
 
-object MythosCraftFabric : ModInitializer {
+object MythosCraft : ModInitializer {
     private const val MOD_ID = "mythoscraft"
     private val LOGGER = LogManager.getLogger()
     val ITEM_GROUP: ItemGroup = FabricItemGroupBuilder.build(id("item_group")) {
