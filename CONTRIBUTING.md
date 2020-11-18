@@ -14,3 +14,7 @@ Please fill out the pull request template, and try to be as descriptive as possi
 Joke, spam, or invalid pull requests will be locked.  
 Repeated spam or joke pull requests will result in a ban.  
 Take a look at the [code guidelines](./CODE_GUIDELINES.md) before making a pull request if you are contributing to code.
+
+## Maintainers and Admins
+
+Please squash PRs.
