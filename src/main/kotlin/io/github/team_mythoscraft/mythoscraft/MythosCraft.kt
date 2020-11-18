@@ -31,9 +31,10 @@ import org.apache.logging.log4j.LogManager
 object MythosCraft : ModInitializer {
     private const val MOD_ID = "mythoscraft"
     private val LOGGER = LogManager.getLogger()
-    val ITEM_GROUP: ItemGroup = FabricItemGroupBuilder.build(id("item_group")) {
-        ItemStack(Items.DIRT)
-    }
+    val ITEM_GROUP: ItemGroup = FabricItemGroupBuilder
+        .create(id("item_group"))
+        .icon { ItemStack(Items.DIRT) }
+        .build()
 
     @JvmStatic
     fun id(path: String): Identifier = Identifier(MOD_ID, path)
@@ -41,6 +42,8 @@ object MythosCraft : ModInitializer {
     override fun onInitialize() {
         // TODO: data generation, port all the other stuff
 
+        // you may be asking yourself, why is this here?
+        // well, it's to forcefully register any items which aren't referenced in code
         ItemRegistries
 
         LOGGER.info("haha yes")
