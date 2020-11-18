@@ -26,5 +26,6 @@ import net.fabricmc.api.Environment
 @Environment(EnvType.CLIENT)
 object MythosCraftClient : ClientModInitializer {
     override fun onInitializeClient() {
+        // run things on client
     }
 }

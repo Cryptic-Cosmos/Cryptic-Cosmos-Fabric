@@ -46,6 +46,7 @@ public class SplashTextResourceSupplierMixin {
             at = @At("TAIL")
     )
     private void addMythosCraftSplashes(List<String> list, ResourceManager resourceManager, Profiler profiler, CallbackInfo ci) {
+        // every mods gotta have at least 1 easter egg
         this.splashTexts.addAll(Lists.newArrayList(
                 "MythosCraft greets you!",
                 "Welcome to MythosCraft!",

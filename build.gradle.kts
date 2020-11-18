@@ -18,12 +18,11 @@ repositories {
 }
 
 dependencies {
-    // To change the versions see the gradle.properties file
     minecraft("com.mojang:minecraft:${property("minecraft_version")}")
     mappings("net.fabricmc:yarn:${property("yarn_mappings")}:v2")
     modImplementation("net.fabricmc:fabric-loader:${property("loader_version")}")
 
-    // Fabric API. This is technically optional, but you probably want it anyway.
+    // fapi
     modImplementation("net.fabricmc.fabric-api:fabric-api:${property("fabric_version")}")
 
     // kotlin adapter
@@ -32,8 +31,7 @@ dependencies {
     // yeet mojank console spam
     modRuntime("user11681:noauth:+")
 
-    // PSA: Some older mods, compiled on Loom 0.2.1, might have outdated Maven POMs.
-    // You may need to force-disable transitiveness on them.
+    // note: older mods on loom 0.2.1 might need transitiveness disabled
 }
 
 tasks {
@@ -57,10 +55,8 @@ tasks {
 }
 
 tasks.withType<JavaCompile>().configureEach {
-    // ensure that the encoding is set to UTF-8, no matter what the system default is
     // this fixes some edge cases with special characters not displaying correctly
-    // see http://yodaconditions.net/blog/fix-for-java-file-encoding-problems-with-gradle.html
-    // If Javadoc is generated, this must be specified in that task too.
+    // if Javadoc is generated, this must be specified in that task too.
     options.encoding = "UTF-8"
 
     // The Minecraft launcher currently installs Java 8 for users, so your mod probably wants to target Java 8 too
@@ -74,9 +70,7 @@ tasks.withType<JavaCompile>().configureEach {
 }
 
 java {
-    // Loom will automatically attach sourcesJar to a RemapSourcesJar task and to the "build" task
-    // if it is present.
-    // If you remove this line, sources will not be generated.
+    // generate remapped sources jar
     withSourcesJar()
 
     sourceCompatibility = JavaVersion.VERSION_1_8
@@ -111,9 +105,7 @@ publishing {
         }
     }
 
-    // Select the repositories you want to publish to
-    // To publish to maven local, no extra repositories are necessary. Just use the task `publishToMavenLocal`.
+    // repositories to publish to
     repositories {
-        // See https://docs.gradle.org/current/userguide/publishing_maven.html for information on how to set up publishing.
     }
 }
