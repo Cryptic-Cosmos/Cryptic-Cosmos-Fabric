@@ -41,7 +41,7 @@ object MythosCraft : ModInitializer {
     override fun onInitialize() {
         // TODO: data generation, port all the other stuff
 
-        ItemRegistries.loadAll()
+        ItemRegistries
 
         LOGGER.info("haha yes")
     }
