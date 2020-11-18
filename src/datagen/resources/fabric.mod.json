@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "mythoscraft",
+  "version": "${version}",
+  "name": "MythosCraft",
+  "description": "A Minecraft mod inspired by the Lovecraft series by author H. P. Lovecraft",
+  "authors": [
+    "Team MythosCraft"
+  ],
+  "contributors": [
+    "xf8b"
+  ],
+  "contact": {
+    "homepage": "https://github.com/Team-Mythoscraft",
+    "sources": "https://github.com/Team-Mythoscraft/MythosCraft-Fabric"
+  },
+  "license": "GPL-3.0-or-later",
+  "environment": "*",
+  "entrypoints": {
+    "preLaunch": [
+      "io.github.team_mythoscraft.mythoscraft.datagen.MythosCraftDatagen::INSTANCE"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.10.8",
+    "fabric": "*",
+    "fabric-language-kotlin": "*",
+    "minecraft": "1.16.4"
+  }
+}

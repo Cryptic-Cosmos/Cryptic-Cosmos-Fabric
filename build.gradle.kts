@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 plugins {
     id("fabric-loom") version "0.5-SNAPSHOT"
     java
@@ -14,7 +16,10 @@ version = property("mod_version")
 group = property("maven_group")
 
 repositories {
+    // for noauth
     maven("https://dl.bintray.com/user11681/maven")
+    // for cloth api
+    maven("https://dl.bintray.com/shedaniel/cloth/")
 }
 
 dependencies {
@@ -31,12 +36,44 @@ dependencies {
     // yeet mojank console spam
     modRuntime("user11681:noauth:+")
 
+    // datagen
+    modApi("me.shedaniel.cloth.api:cloth-datagen-api-v1:${property("cloth_api_version")}")
+    include("me.shedaniel.cloth.api:cloth-datagen-api-v1:${property("cloth_api_version")}")
+
     // note: older mods on loom 0.2.1 might need transitiveness disabled
 }
 
+sourceSets {
+    main {
+        resources {
+            srcDir("src/generated/resources")
+        }
+    }
+
+    sourceSets.create("datagen") {
+        compileClasspath += sourceSets.main.get().compileClasspath
+        runtimeClasspath += sourceSets.main.get().runtimeClasspath
+    }
+}
+
 tasks {
-    compileKotlin {
+    withType<KotlinCompile>().configureEach {
         kotlinOptions.jvmTarget = "1.8"
+    }
+
+    withType<JavaCompile>().configureEach {
+        // this fixes some edge cases with special characters not displaying correctly
+        // if Javadoc is generated, this must be specified in that task too.
+        options.encoding = "UTF-8"
+
+        // The Minecraft launcher currently installs Java 8 for users, so your mod probably wants to target Java 8 too
+        // JDK 9 introduced a new way of specifying this that will make sure no newer classes or methods are used.
+        // We'll use that if it's available, but otherwise we'll use the older option.
+        val targetVersion = "8"
+
+        if (JavaVersion.current().isJava9Compatible) {
+            options.compilerArgs.addAll(listOf("--release", targetVersion))
+        }
     }
 
     processResources {
@@ -52,20 +89,12 @@ tasks {
             rename { "${it}_${project.base.archivesBaseName}" }
         }
     }
-}
 
-tasks.withType<JavaCompile>().configureEach {
-    // this fixes some edge cases with special characters not displaying correctly
-    // if Javadoc is generated, this must be specified in that task too.
-    options.encoding = "UTF-8"
-
-    // The Minecraft launcher currently installs Java 8 for users, so your mod probably wants to target Java 8 too
-    // JDK 9 introduced a new way of specifying this that will make sure no newer classes or methods are used.
-    // We'll use that if it's available, but otherwise we'll use the older option.
-    val targetVersion = "8"
-
-    if (JavaVersion.current().isJava9Compatible) {
-        options.compilerArgs.addAll(listOf("--release", targetVersion))
+    create(name = "generateData", type = net.fabricmc.loom.task.RunClientTask::class) {
+        dependsOn(downloadAssets)
+        classpath = configurations.runtimeClasspath.get()
+        classpath(sourceSets["main"].output)
+        classpath(sourceSets["datagen"].output)
     }
 }
 
