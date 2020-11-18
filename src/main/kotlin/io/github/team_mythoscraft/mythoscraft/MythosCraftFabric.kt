@@ -26,9 +26,11 @@ import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
 import net.minecraft.item.Items
 import net.minecraft.util.Identifier
+import org.apache.logging.log4j.LogManager
 
 object MythosCraftFabric : ModInitializer {
     private const val MOD_ID = "mythoscraft"
+    private val LOGGER = LogManager.getLogger()
     val ITEM_GROUP: ItemGroup = FabricItemGroupBuilder.build(id("item_group")) {
         ItemStack(Items.DIRT)
     }
@@ -41,6 +43,6 @@ object MythosCraftFabric : ModInitializer {
 
         ItemRegistries.loadAll()
 
-        println("haha yes")
+        LOGGER.info("haha yes")
     }
 }
