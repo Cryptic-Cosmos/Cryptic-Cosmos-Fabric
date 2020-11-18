@@ -88,8 +88,6 @@ avoiding the `is` and `has` prefixes when possible (`colored`, not `isColored` o
 ##### Java Conventions Notes
 **This is not an exhaustive list.**  
 The people over at FabricMC have created wonderful, more in-depth conventions. [See it here.](https://github.com/FabricMC/yarn/blob/20w46a/CONVENTIONS.md)
-Exceptions to the FabricMC conventions:
-- Refrain from using `@return` or `@param`, as described in the Kotlin Conventions.
 
 ### Note
 This document was last edited 2020-11-18 22:34:35 UTC (ISO 8601).
