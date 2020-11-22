@@ -1,23 +1,23 @@
 {
   "schemaVersion": 1,
-  "id": "mythoscraft",
+  "id": "mythoscraft-datagen",
   "version": "${version}",
-  "name": "MythosCraft",
-  "description": "A Minecraft mod inspired by the Lovecraft series by author H. P. Lovecraft",
+  "name": "MythosCraft Datagen",
+  "description": "fake mod for datagen hahayes",
   "authors": [
-    "Team MythosCraft"
+    "smh"
   ],
   "contributors": [
-    "xf8b"
+    "who contributed"
   ],
   "contact": {
-    "homepage": "https://github.com/Team-Mythoscraft",
-    "sources": "https://github.com/Team-Mythoscraft/MythosCraft-Fabric"
+    "homepage": "no",
+    "sources": "imagine a github"
   },
   "license": "GPL-3.0-or-later",
   "environment": "*",
   "entrypoints": {
-    "preLaunch": [
+    "main": [
       "io.github.team_mythoscraft.mythoscraft.datagen.MythosCraftDatagen::INSTANCE"
     ]
   },

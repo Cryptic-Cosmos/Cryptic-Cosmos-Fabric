@@ -19,7 +19,6 @@
 
 package io.github.team_mythoscraft.mythoscraft
 
-import io.github.team_mythoscraft.mythoscraft.registries.BlockRegistries
 import io.github.team_mythoscraft.mythoscraft.registries.ItemRegistries
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder
@@ -30,12 +29,12 @@ import net.minecraft.util.Identifier
 import org.apache.logging.log4j.LogManager
 
 object MythosCraft : ModInitializer {
-    private const val MOD_ID = "mythoscraft"
-    private val LOGGER = LogManager.getLogger()
+    const val MOD_ID = "mythoscraft"
     val ITEM_GROUP: ItemGroup = FabricItemGroupBuilder
         .create(id("item_group"))
         .icon { ItemStack(Items.DIRT) }
         .build()
+    private val LOGGER = LogManager.getLogger()
 
     @JvmStatic
     fun id(path: String): Identifier = Identifier(MOD_ID, path)
@@ -46,7 +45,6 @@ object MythosCraft : ModInitializer {
         // you may be asking yourself, why is this here?
         // well, it's to forcefully register any items/blocks/whatever which aren't referenced in code
         ItemRegistries
-        BlockRegistries
 
         // why is this here? because i was bored and also yes
         LOGGER.info("haha yes")

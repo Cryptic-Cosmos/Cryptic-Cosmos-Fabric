@@ -9,11 +9,24 @@ plugins {
     id("maven-publish")
 }
 
-fun property(name: String): Any = project.findProperty(name)!!
+fun property(name: String) = project.findProperty(name)!!
 
 base.archivesBaseName = property("archives_base_name").toString()
 version = property("mod_version")
 group = property("maven_group")
+
+sourceSets {
+    main {
+        resources {
+            srcDir("src/generated/resources")
+        }
+    }
+
+    sourceSets.create("datagen") {
+        compileClasspath += sourceSets.main.get().compileClasspath
+        runtimeClasspath += sourceSets.main.get().runtimeClasspath
+    }
+}
 
 repositories {
     // for noauth
@@ -41,19 +54,7 @@ dependencies {
     include("me.shedaniel.cloth.api:cloth-datagen-api-v1:${property("cloth_api_version")}")
 
     // note: older mods on loom 0.2.1 might need transitiveness disabled
-}
-
-sourceSets {
-    main {
-        resources {
-            srcDir("src/generated/resources")
-        }
-    }
-
-    sourceSets.create("datagen") {
-        compileClasspath += sourceSets.main.get().compileClasspath
-        runtimeClasspath += sourceSets.main.get().runtimeClasspath
-    }
+    "datagenCompile"(sourceSets.main.get().output)
 }
 
 tasks {

@@ -19,23 +19,78 @@
 
 package io.github.team_mythoscraft.mythoscraft.datagen
 
+import com.google.gson.JsonObject
+import com.google.gson.JsonPrimitive
+import io.github.team_mythoscraft.mythoscraft.MythosCraft
+import io.github.team_mythoscraft.mythoscraft.registries.ItemRegistries
 import me.shedaniel.cloth.api.datagen.v1.DataGeneratorHandler
-import net.fabricmc.loader.api.entrypoint.PreLaunchEntrypoint
+import net.fabricmc.api.ModInitializer
+import net.minecraft.item.*
+import net.minecraft.util.Identifier
+import net.minecraft.util.registry.Registry
+import org.apache.commons.lang3.text.WordUtils
 import org.apache.logging.log4j.LogManager
 import java.nio.file.Paths
+import kotlin.reflect.full.memberProperties
 import kotlin.system.exitProcess
 
-object MythosCraftDatagen : PreLaunchEntrypoint {
+object MythosCraftDatagen : ModInitializer {
     private val LOGGER = LogManager.getLogger()
 
-    /**
-     * Runs the entrypoint.
-     */
-    override fun onPreLaunch() {
+    override fun onInitialize() {
         try {
             val handler = DataGeneratorHandler.create(Paths.get("../src/generated/resources"))
 
-            TODO("dont run this yet")
+            val klass = ItemRegistries::class
+            val itemProperties = klass.memberProperties
+                .map { it.get(klass.objectInstance!!) }
+                .filterIsInstance<Item>()
+            val languageJson = JsonObject()
+
+            for (item in itemProperties) {
+                handler.modelStates.addHandheldItemModel(item)
+
+                if (item is ToolItem || item is ShearsItem) {
+                    val tag = when (item) {
+                        is SwordItem -> "swords"
+                        is PickaxeItem -> "pickaxes"
+                        is AxeItem -> "axes"
+                        is ShovelItem -> "shovels"
+                        is HoeItem -> "hoes"
+                        is ShearsItem -> "shears"
+                        else -> error("update datagen pls")
+                    }
+
+                    handler.tags.item(Identifier("fabric", tag)).appendOptional(item)
+
+                    /*
+                    ShapedRecipeJsonFactory
+                        .create { item }
+                        .apply {
+                            when (item) {
+                                is SwordItem -> this.group("swords")
+                                    .input('s', Items.STICK)
+                                    .input('')
+                            }
+                        }
+                        .offerTo { handler.recipes.accept(it) }
+                        */
+                }
+
+                languageJson.add(
+                    item.translationKey,
+                    JsonPrimitive(
+                        WordUtils.capitalizeFully(
+                            Registry.ITEM
+                                .getId(item)
+                                .path
+                                .replace("_", " ")
+                        )
+                    )
+                )
+            }
+
+            handler.simple.addJson("assets/${MythosCraft.MOD_ID}/lang/en_us.json", languageJson)
 
             handler.run()
         } catch (throwable: Throwable) {
@@ -43,6 +98,11 @@ object MythosCraftDatagen : PreLaunchEntrypoint {
             exitProcess(1)
         }
 
+        LOGGER.info("thanks for flying on datagen airways™, we are approaching the runway")
+
         exitProcess(0)
+
+        @Suppress("UNREACHABLE_CODE") // this is for the haha funi
+        LOGGER.fatal("oh shit")
     }
 }
